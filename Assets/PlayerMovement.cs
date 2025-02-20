@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 1f;
-   
+    public float MoveSpeed = 10f;
+    public float RotateSpeed = 75f;
+    private float _vInput;
+    private float _hInput;
+    private Rigidbody _rb;
     void Start()
     {
-        
+        _rb = GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 a = new Vector3(horizontal, 0, 0);
-        Vector3 b = new Vector3(0, 0, vertical);
-        transform.Translate(a*speed*Time.deltaTime);
-        transform.Translate(b*speed*Time.deltaTime);
+        _vInput = Input.GetAxis("Vertical") * MoveSpeed;
+        _hInput = Input.GetAxis("Horizontal") * RotateSpeed;
+    }
+    void FixedUpdate()
+    {
+        Vector3 rotation = Vector3.up * _hInput;
+        Quaternion angleRot = Quaternion.Euler(rotation * Time.fixedDeltaTime);
+        _rb.MovePosition(this.transform.position + this.transform.forward * _vInput * Time.fixedDeltaTime);
+        _rb.MoveRotation(_rb.rotation * angleRot);
     }
 }
+
+

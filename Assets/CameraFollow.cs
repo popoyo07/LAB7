@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //attach this script to the main camera
+    public Transform target; //reference the player
+    public Transform CameraObject; //reference the camera
+    public int scalar = 1;
     void Start()
     {
-        
+        CameraObject.transform.rotation = Quaternion.Euler(45, 0, 0);
     }
 
+    
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+
+        CameraObject.transform.position = target.position + (Vector3.up*scalar) + (Vector3.back*scalar);
+        
         
     }
 }
