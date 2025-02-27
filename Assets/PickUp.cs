@@ -1,22 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    //assume object has collider 
-    
-    
-    
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider Other)
     {
-        if (other.CompareTag("item"))
+        if (Other.CompareTag("Player"))
         {
-            Debug.Log("You collected an item");
-            Destroy(GameObject.Find("Item"));
+            Debug.Log("A collision has occured");
+            Destroy(gameObject);
         }
-        
-        
+
     }
 }

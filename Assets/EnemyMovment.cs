@@ -10,6 +10,7 @@ public class EnemyMovment : MonoBehaviour
     private NavMeshAgent enemy;
     private int waypointInedx;
     [SerializeField] private GameObject player;
+    private Renderer E;
 
     private bool onSight;
 
@@ -32,6 +33,8 @@ public class EnemyMovment : MonoBehaviour
     {
         enemy = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
+        E = GetComponent<Renderer>();
+        
 
     }
     private void Update()
@@ -49,11 +52,16 @@ public class EnemyMovment : MonoBehaviour
 
     private void Chase()
     {
+
+        E.material.SetColor("_Color", Color.red);
         enemy.SetDestination(player.transform.position);
+        
     }
 
     private void Patrol()
     {
+        E.material.SetColor("_Color", Color.blue);
+
         if (enemy.remainingDistance <= .5f)
         {
             waypointInedx = Random.Range(0, waypoints.Length);
