@@ -11,10 +11,10 @@ public class PickUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("item"))
+        if (other.CompareTag("Player"))
         {
             Debug.Log("You collected an item");
-            Destroy(GameObject.Find("Item"));
+            Destroy(gameObject);
         }
         
         
